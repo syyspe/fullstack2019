@@ -1,0 +1,20 @@
+{
+  "name": "osa8a",
+  "version": "1.0.0",
+  "description": "fullstack 2019 osa 8a",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Pekka Syysmeri",
+  "license": "MIT",
+  "dependencies": {
+    "apollo-server": "^2.5.0",
+    "dotenv": "^8.0.0",
+    "graphql": "^14.3.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.5.9",
+    "mongoose-unique-validator": "^2.0.3"
+  }
+}
