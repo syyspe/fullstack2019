@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useQuery, useMutation, useApolloClient } from 'react-apollo-hooks'
+import { Subscription } from 'react-apollo'
 
 import Notification from './components/Notification'
 import Authors from './components/Authors'
@@ -9,6 +10,7 @@ import NewBook from './components/NewBook'
 import LoginForm from './components/LoginForm'
 import { ALL_BOOKS, ALL_AUTHORS, ME } from './graphql/queries'
 import { ADD_BOOK, EDIT_AUTHOR, LOGIN } from './graphql/mutations'
+import { BOOK_ADDED } from './graphql/subscriptions'
 
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem('book-app-token'))
@@ -102,6 +104,21 @@ const App = () => {
         setToken={setToken}
         handleError={notify}
       />
+
+      <Subscription
+        subscription={BOOK_ADDED}
+        onSubscriptionData={({ subscriptionData }) => {
+          window.alert('New book added: ' + 
+            subscriptionData.data.bookAdded.title + 
+            '\nAuthor: ' + 
+            subscriptionData.data.bookAdded.author.name
+          )
+          books.refetch()
+          authors.refetch()
+        }}
+      >
+        {() => null}
+      </Subscription>
     </div>
   )
 
